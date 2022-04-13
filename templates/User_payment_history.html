@@ -1,0 +1,157 @@
+{%extends 'User_index.html'%} {% block content %} {% load static %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="col-12 d-flex pb-1">
+              <div class="col-6 p-0 my-auto ">
+                <h3 class="card-title">Payment</h3>
+              </div>
+              <div class="col-6 d-md-flex justify-content-md-end">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#exampleModal">
+                  Add Payment
+                </button>  
+              </div>
+            </div>
+            <input type="text" class="form-control my-2" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            <div class="table-responsive">
+              <table class="table table-hover" id="myTable">
+                <thead>
+                  <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Bank Name</th>
+                    <th>Acc.Number</th>
+                    <th>IFSC Code</th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>payment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Jacob</td>
+                    <td>Federal Bank</td>
+                    <td>21520100060211</td>
+                    <td>FDRL00001</td>
+                    <td>08/04/2021</td>
+                    <td>08/05/2021</td>
+                    <td>500</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>SBI</td>
+                    <td>21520100060211</td>
+                    <td>SBI00001</td>
+                    <td>08/03/2021</td>
+                    <td>08/04/2021</td>
+                    <td>500</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Jacob</td>
+                    <td>Federal Bank</td>
+                    <td>21520100060211</td>
+                    <td>FDRL00001</td>
+                    <td>08/02/2021</td>
+                    <td>08/03/2021</td>
+                    <td>500</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Add Payment</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form action="{% url 'User_payment_history' %}">
+        <div class="form-group">
+          <label>Bank Name</label>
+          <input type="text" class="form-control form-control-sm" aria-label="Username">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Acc.Number</label>
+            <input type="text" class="form-control" id="inputEmail4">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">IFSC Code</label>
+            <input type="text" class="form-control" id="inputPassword4">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Date</label>
+            <input type="date" class="form-control" id="inputEmail4">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Amount</label>
+            <input type="text" class="form-control" id="inputPassword4">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Add Payment</button>
+    </div>
+  </div>
+</div>
+</div>
+      <!-- Modal -->
+  <script>
+    $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').trigger('focus')
+    })
+  </script>
+
+<script>
+  function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
+          }
+      }
+  }
+</script>
+<script>
+  $(document).ready(function() {
+      $('table tr').click(function() {
+          window.location = $(this).data('href');
+          return false;
+      });
+  });
+</script>
+  {% endblock %}

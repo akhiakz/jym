@@ -1,0 +1,112 @@
+{%extends 'SuperAdmin_index.html'%} {% block content %} {% load static %}
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title p-1">Resigned Trainers</h3>
+            <input type="text" class="form-control mb-2" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            <div class="table-responsive">
+              <table class="table table-hover" id="myTable">
+                <thead>
+                  <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Ph.No</th>
+                    <th>Rate</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Renew</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Jacob</td>
+                    <td>Jacob@gmail.com</td>
+                    <td>9988776655</td>
+                    <td>2000</td>
+                    <td>Resigned</td>
+                    <td> <a href="{% url 'SuperAdmin_resignedtrainer_update' %}">
+                        <div class="btn btn-inverse-success btn-sm"><i class="ti-reload pr-2"></i>Update</div>
+                      </a>
+                    </td>
+                    <td> <a href="#">
+                      <div class="btn btn-inverse-primary btn-sm"><i class="ti-loop pr-2"></i>Renew</div>
+                    </a>
+                  </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Arthur</td>
+                    <td>Arthur@gmail.com</td>
+                    <td>9988776655</td>
+                    <td>2000</td>
+                    <td>Resigned</td>
+                    <td> <a href="{% url 'SuperAdmin_resignedtrainer_update' %}">
+                        <div class="btn btn-inverse-success btn-sm"><i class="ti-reload pr-2"></i>Update</div>
+                      </a>
+                    </td>
+                    <td> <a href="#">
+                      <div class="btn btn-inverse-primary btn-sm"><i class="ti-loop pr-2"></i>Renew</div>
+                    </a>
+                  </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Thomas</td>
+                    <td>Thomas@gmail.com</td>
+                    <td>9988776655</td>
+                    <td>2000</td>
+                    <td>Resigned</td>
+                    <td> <a href="{% url 'SuperAdmin_resignedtrainer_update' %}">
+                        <div class="btn btn-inverse-success btn-sm"><i class="ti-reload pr-2"></i>Update</div>
+                      </a>
+                    </td>
+                    <td> <a href="#">
+                      <div class="btn btn-inverse-primary btn-sm"><i class="ti-loop pr-2"></i>Renew</div>
+                    </a>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+
+  <script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $('table tr').click(function() {
+            window.location = $(this).data('href');
+            return false;
+        });
+    });
+</script>
+  {% endblock %}
